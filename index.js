@@ -20,7 +20,11 @@ app.use(session({
   secret:'win',
   resave:false,
   saveUninitialized:true,
-  cookie:{secure:false, httpOnly:true}
+  cookie:{
+    maxAge: new Date() * 0.001 + 300,
+    domain: 'netlify.app',
+    secure: true,
+    sameSite:'none'}
 }))
 
 app.use(routerUser)
