@@ -3,7 +3,6 @@ const cors = require('cors')
 const bcrypt = require('bcrypt')
 const session = require('express-session')
 const app = express()
-const PORT = 3000
 const routerMiddleware = require('./router/middleware')
 const routerCart = require('./router/cart')
 const routerProduct = require('./router/product')
@@ -30,6 +29,6 @@ app.use(routerMiddleware)
 app.use(routerCart)
 
 
-app.listen(PORT, ()=>{
-  console.log(`SERVER SUDAH BERJALAN DI PORT ${PORT}`)
+app.listen(process.env.PORT || 3000, ()=>{
+  console.log(`SERVER SUDAH BERJALAN DI PORT ${process.env.PORT || 3000}`)
 })
