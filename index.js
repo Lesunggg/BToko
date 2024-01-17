@@ -24,7 +24,8 @@ app.use(session({
     maxAge: new Date() * 0.001 + 300,
     domain: 'netlify.app',
     secure: true,
-    sameSite:'none'}
+    sameSite:'none',
+    httpOnly: false}
 }))
 
 app.use(routerUser)
