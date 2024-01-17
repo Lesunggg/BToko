@@ -10,6 +10,8 @@ const routerUser = require('./router/user')
 
 app.use(express.text())
 app.use(express.json())
+
+app.set("trust proxy", 1)
 app.use(cors({
   origin: "https://toko-trio.netlify.app",
   methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS", "HEAD"],
