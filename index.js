@@ -21,8 +21,8 @@ app.use(session({
   resave:false,
   saveUninitialized:true,
   cookie:{
-    maxAge: new Date() * 0.001 + 300,
-    domain: 'netlify.app',
+    maxAge: 1000*60*60*12,
+    domain: 'toko-trio.netlify.app',
     secure: true,
     sameSite:false}
 }))
