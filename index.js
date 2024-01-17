@@ -24,9 +24,10 @@ app.use(session({
   saveUninitialized:true,
   cookie:{
     maxAge: 1000*60*60*12,
-    domain: 'https://toko-trio.netlify.app',
+    domain: 'toko-trio.netlify.app',
     secure: true,
-    sameSite:false}
+    sameSite:SameSiteMode.None,
+    httpOnly:true}
 }))
 
 app.use(routerUser)
