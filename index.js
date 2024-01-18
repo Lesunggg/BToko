@@ -11,7 +11,7 @@ const routerUser = require('./router/user')
 app.use(express.text())
 app.use(express.json())
 
-app.set("trust proxy", 1)
+
 app.use(cors({
   origin: "https://toko-trio.netlify.app",
   methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS", "HEAD"],
@@ -24,7 +24,7 @@ app.use(session({
   saveUninitialized:true,
   cookie:{
     maxAge: 1000*60*60*12,
-    domain: "https://toko-trio.netlify.app",
+    domain: "netlify.app",
     secure: true,
     sameSite:"none",
     httpOnly:true}
