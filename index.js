@@ -25,7 +25,7 @@ app.use(session({
   proxy:true,
   cookie:{
     maxAge: 1000*60*60*12,
-    domain: "https://toko-trio.netlify.app",
+    domain: "toko-trio.netlify.app",
     secure: true,
     sameSite:"none",
     httpOnly:true}
