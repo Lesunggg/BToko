@@ -22,6 +22,7 @@ app.use(session({
   secret:'win',
   resave:false,
   saveUninitialized:true,
+  proxy:true,
   cookie:{
     maxAge: 1000*60*60*12,
     domain: "netlify.app",
