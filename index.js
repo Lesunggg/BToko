@@ -25,7 +25,7 @@ app.use(session({
   proxy:true,
   cookie:{
     maxAge: 1000*60*60*12,
-    domain: "netlify.app",
+    domain: "https://btoko.up.railway.app",
     secure: true,
     sameSite:"none",
     httpOnly:true}
