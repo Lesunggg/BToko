@@ -4,7 +4,8 @@ const connection = require('./data')
 const middleware = require('./middleware')
 
 router.post('/cart/add',middleware,(req,res)=>{
-  const user = req.session.user.id
+  const datas = res.locals.data
+  const user = datas.id
   const kodeBrg = req.body.kode
   const qty = req.body.qty
   const qcek = `SELECT * FROM cart WHERE kode_user=${user} AND kode_brg=${kodeBrg}`
@@ -61,11 +62,12 @@ router.delete('/cart/delete/:id',middleware,(req,res)=>{
 })
   
 router.get('/cart',middleware,(req,res)=>{
+  const datas = res.locals.data
   const q = `
   SELECT cart.cartid, cart.kode_user, cart.kode_brg, produk.nama, cart.qty, produk.harga
   FROM cart
   LEFT JOIN produk ON cart.kode_brg = produk.kode
-  WHERE kode_user=${req.session.user.id}
+  WHERE kode_user=${datas.id}
   ORDER BY cart.cartid;
   `
   connection.query(q,(err,result)=>{
@@ -77,7 +79,7 @@ router.get('/cart',middleware,(req,res)=>{
     for (let item of result) {
       total+=(item.harga*item.qty)
     }
-    const data = [req.session.user,result,total]
+    const data = [datas,result,total]
     res.send(data)
   })
 })
