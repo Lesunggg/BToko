@@ -3,6 +3,7 @@ const router = express.Router()
 const connection = require('./data')
 const bcrypt = require('bcrypt')
 const middleware = require('./middleware')
+const jwt = require('jsonwebtoken')
 router.get('/cek',middleware,(req,res)=>{
   res.send('Success')
 })
@@ -28,14 +29,14 @@ router.post('/register',(req,res) => {
 
     bcrypt.hash(user.pass, 10, (err,result) => {
       if (err) {
-      res.status(500).send("ada masalah dengan server")
-      return;
+        res.status(500).send("ada masalah dengan server")
+        return;
       }
       const qtmbh = `INSERT INTO user (nama, password) VALUES ('${user.nama}', '${result}')`
       connection.query(qtmbh,(err,result) => {
         if (err){
-        res.status(500).send('Ada masalah dengan hubungan ke server')
-        return
+          res.status(500).send('Ada masalah dengan hubungan ke server')
+          return
         }
       res.status(201).send('Yeay, Registrasi User Berhasil')
       })
@@ -64,11 +65,19 @@ router.get('/login',(req,res)=>{
           res.status(500).send('Login Server Problem')
           return;
         }
-
         if (hasil) {
-          req.user = result[0]
-          req.session.user = req.user
-          res.send('Login Successful')
+          const payload = {
+            id: result[0].id,
+            name: loginname,
+            pass: password
+          }
+          jwt.sign(payload, "winnnnn", (err,token)=>{
+            const data = {
+              "token" : token,
+              "note" : "Login Successful"
+            } 
+            res.send(data)
+          })
         } else {
           res.status(404).send('Not Found')
         }
@@ -78,13 +87,7 @@ router.get('/login',(req,res)=>{
 })
 
 router.delete('/logout',middleware,(req,res)=>{
-  if (req.session.user) {
-    req.session.destroy();
-    res.send('Logout Success')
-  }
-  else{
-    res.send('Unable to log out')
-  }
+  res.send('Logout Success')
 })
 
 module.exports = router
