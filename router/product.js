@@ -8,18 +8,33 @@ router.get('/',(req,res)=>{
 router.get('/product',(req,res)=>{
   const q = 'SELECT * FROM produk'
   connection.query(q,(err,results)=>{
+    if (err) {
+      console.error(err)
+      res.status(500).send("Server Problem")
+      return;                
+    }
     res.json(results)
   })
 })
 router.get('/product/:id',(req,res)=>{
   const q = `SELECT * FROM produk WHERE kode=${req.params.id}`
   connection.query(q,(err,results)=>{
+    if (err) {
+      console.error(err)
+      res.status(500).send("Server Problem")
+      return;                
+    }
     res.json(results)
   })
 })
 router.get('/product/filter/:jenis',(req,res)=>{
   const q = `SELECT * FROM produk WHERE jenis='${req.params.jenis}'`
   connection.query(q,(err,results)=>{
+    if (err) {
+      console.error(err)
+      res.status(500).send("Server Problem")
+      return;                
+    }
     res.json(results)
   })
 })
