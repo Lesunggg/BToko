@@ -23,7 +23,7 @@ router.post('/register',(req,res) => {
     }
 
     if (result.length != 0){
-      res.status(401).send('Name is registered')
+      res.status(400).send('Name is registered')
       return;
     }
 
