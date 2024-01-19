@@ -21,5 +21,5 @@ app.use(routerMiddleware)
 app.use(routerCart)
 
 app.listen(process.env.PORT || 3000, ()=>{
-  console.log(`SERVER SUDAH BERJALAN DI PORT ${PORT}`)
+  console.log(`SERVER SUDAH BERJALAN DI PORT ${process.env.PORT || 3000}`)
 })
