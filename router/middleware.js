@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt')
 router.use((req,res,next)=>{   
   token = req.headers.authorization
   if (token == "") {
-    res.status(404).send('Account not found, Please login first')
+    res.status(401).send('Account not found, Please login first')
     return
   }
   jwt.verify(token, "winnnnn", (err,decoded)=>{
@@ -25,7 +25,7 @@ router.use((req,res,next)=>{
         return
       }
       if (result.length === 0) {
-        res.status(404).send('Account not found, Please login first')
+        res.status(401).send('Account not found, Please login first')
         return
       }
       bcrypt.compare(pass, result[0].password, (err, hasil) => {
