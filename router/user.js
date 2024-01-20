@@ -72,6 +72,11 @@ router.get('/login',(req,res)=>{
             pass: password
           }
           jwt.sign(payload, "winnnnn", (err,token)=>{
+            if (err) {
+              console.error(err)
+              res.send('Server sedang Error')
+              return;
+            }
             const data = {
               "token" : token,
               "note" : "Login Successful"
